@@ -1,0 +1,261 @@
+---
+title: "Resolución de la Práctica en Rmarkdown"
+author: "19160165 ChapilliquenEdwing"
+output: github_document
+---
+# Práctica calificada 01
+
+---
+
+## Problemas Ejercicios
+### **1. ¿Qué cantidad de dinero sobra al repartir 10000$ entre 3 personas?**
+
+Para este problema usaremos el operador `%%` para hallar el residuo de una operación.
+
+```{r}
+sobrante <- 10000%%3
+sobrante
+``` 
+> _rpta: Sobra 1$_
+
+### **2. ¿Es el número 4560 divisible por 3?**
+
+Para saber si es divisible usamos el operador `%%` para obtener el residuo de una división, si este es igual a 0 entonces sí es divisible por 3, si ejecuta un número diferente de 0, no es divisible por 3.
+
+```{r}
+divisible <- 4560 %% 3
+divisible
+```
+> _rpta: Sí es divisible por 3_
+
+### **3. Construya un vector con los números enteros del 2 al 87. ¿Cuáles de esos números son divisibles por 7?** 
+
+Se quiere saber **los números** que son divisibles en ese vector, entonces:
+```{r}
+vector_prob3 <- c(2:87)
+```
+Ahora a del `vector_prob3` extraemos aquellos números que al dividir entre 7 tengan residuo igual a 0:
+```{r}
+rpta_prob3 <- vector_prob3[(vector_prob3 %% 7) == 0]
+rpta_prob3
+```
+> _rpta: Los números son: {7,14,21,28,35,42,49,56,63,70,77,84}_
+
+### **4. Construya dos vectores, el primero con los números enteros desde 7 hasta 3, el segundo vector con los primeros cinco números positivos divisibles por 5.**
+
+**- Sea A la condición de ser par en el primer vector.**
+
+**- Sea B la condición de ser mayor que 10 en el segundo vector.**
+
+**- ¿En cuál de las 5 posiciones se cumplen A y B simultáneamente?.** 
+
+Creamos los dos vectores, el primero del 7 al 3 y para el segundo se crea un vector de los primeros cinco números divisibles entre 5. 
+```{r}
+vector1 <- 7:3 
+vector1
+```
+```{r}
+x <- 1:25
+x1 <- x[(x%%5)==0]
+vector2 <- x1
+vector2 
+```
+Para la primera condición:
+```{r}
+A <- c()
+for(i in vector1){
+  if (i%%2==0)
+    A <- c(A,i)
+}
+A
+```
+Para la segunda condición:
+```{r}
+B <- c()
+for(i in vector2){
+  if(i > 10)
+    B <- c(B,i)
+}
+B 
+```
+Para la tercera condición:
+
+- No se cumpliría ningún caso.
+
+### **5. Consulte este [link](https://github.com/fhernanb/Manual-de-R/blob/master/images/anecdota_gauss.PNG) en el cual hay una anéctoda de Gauss niño. Use R para obtener el resultado de la suma solicitada por el profesor del niño Gauss.**
+
+Notamos que el debemos hallar la sumatoria del 1 al 100 y usamos la función `sum()`
+```{r}
+gauss <- sum(1:100)
+gauss
+```
+> _rpta: 5050_
+
+### **6. Construya un vector con los siguientes elementos: 1, -4, 5, 9, -4. Escriba un procedimiento para extraer las posiciones donde está el valor mínimo en el vector.**
+Construimos el vector y hacemos una condición, la cual nos dará por resultado la posición del mínimo elemento.
+```{r}
+vector3 <- c(1, -4, 5, 9, -4)
+for(i in 1:length(vector3)){
+  if(min(vector3)==vector3[i])
+    print(i)
+}
+```
+> _rpta: Los mínimos elementos se encuentran en las posiciones 2 y 5._
+
+### **7. Calcular 8!**
+Usamos la función `prod()` con una secuencia del 1 al 8
+```{r}
+prob7 <- prod((1:8))
+prob7
+```
+> _rpta: 40320_
+
+### **8. Evaluar la siguiente sumatoria:** $\sum_{i=3}^{i=7} e^i$
+Hallamos mediante la función `sum` y definimos el número neperiano *e*
+```{r}
+i <- c(3:7)
+e <- 2.71828
+prob8 <- sum(e^i)
+prob8
+```
+> _rpta: 1723.151_
+
+### **9. Evaluar la siguiente productoria:** $\prod_{i=1}^{i=10}log\sqrt(i)$
+```{r}
+i <- c(1:10)
+prob9 <- prod(log(sqrt(i)))
+prob9
+```
+> _rpta: 0_
+
+### **10. Realizar una función que permita calcular el area de una corona circular.**
+<center>![Área de segmento circular](https://upload.wikimedia.org/wikipedia/commons/f/fb/Circularsegment.svg)</center>
+
+
+
+Para este caso tendremos que hacer una función que sea la resta entre dos áreas, la primera el sector circular y la segunda el triángulo.
+
+Entonces, para el área1 (ar1) y área2(ar2), tendremos que definir el radio (R), teta ($\theta$) y la distancia (d) que será la mitad del radio. 
+
+```{r}
+R=25
+teta= 70 #grados
+d=R/2
+
+ar1 <- function(R,teta){
+  result <- (((pi*(R^2))*teta)/360)
+  return(result)
+}
+area1 <- ar1(R,teta)
+area1
+
+ar2 <- function(d,R){
+  result2 <- (sqrt(R^2 - d^2))
+  return(result2)
+}
+area2 <-ar2(d,R)
+area2
+```
+
+```{r}
+ar_final <- area1 - area2
+ar_final
+```
+
+### **11. Construya un vector cualquiera e inviertalo, es decir, que el primer elemento quede de último, el segundo de penúltimo y así sucecivamente. Compare su resultado con el de la función `rev()`**
+
+### **12. Calcular lo siguiente:** $\sum_{i=10}^{i=100} (i^3 +4i^2)$
+Hallamos mediante la función `sum`
+```{r}
+i <- 10:100
+prob12 <- sum(i^3 + 4*i^2)
+prob12
+```
+>_rpta: 26852735_
+
+### **13. Calcular lo siguiente: ** $\sum_{i=1}^{i=25} (\frac{2^i}{i} + \frac{3^i}{i^2})$
+Hallamos mediante la función `sum`
+```{r}
+i <- 1:25
+prob13 <- sum(((2^i)/i)+((3^i)/i^2))
+prob13
+```
+>_rpta: 2129170437_
+
+### **14. Lea el siguiente [archivo](https://raw.githubusercontent.com/fhernanb/datos/master/Paises.txt)**
+
+***Calcular el número de variables del dataset**
+
+***¿Cuántos países hay en el dataset?**
+
+***¿Cuál es el país con mayor población?**
+
+***¿Cuál es el país con alfabetización más baja?** 
+
+Para resolver el problema leemos el archivo y vemos que hay en él:
+```{r}
+archivo <- read.delim("https://raw.githubusercontent.com/fhernanb/datos/master/Paises.txt")
+head(archivo)
+```
+
+
+Ahora para el primer punto llamamos la función `names()` el cual nos dará las variables y también la función `length()`que nos dirá el número de variables del data set:
+```{r}
+num_var <- names(archivo)
+length(num_var)
+```
+>_rpta: 5_
+
+Una vez visto lo que contiene el documento para el segundo punto, sabemos que en las filas están los países, se utiliza la función `nrow()` que nos indica el número de filas, o sea el número de países.
+```{r}
+num_pai <- nrow(archivo)
+num_pai 
+```
+>_rpta: 107_
+
+Para el tercer punto, usamos la función`subset()` para que nos de como resultado el país con mayor población. 
+```{r}
+país_max_pob <- subset(archivo, poblacion==max(archivo$poblacion)) 
+país_max_pob
+```
+>_rpta: China_
+
+Y para el último punto también usaremos la función `subet()` teniendo en cuenta que la alfabetización debe ser la mínima.
+```{r}
+pais_baj_alf <- subset(archivo, alfabetizacion == min(archivo$alfabetizacion))
+pais_baj_alf
+```
+>_rpta: Burkina_Faso_ 
+
+### **15. En R hay unas base de datos incluídas, una de ellas es la base de datos llamada mtcars. Para conocer las variables que están en mtcars usted puede escribir en la consola `?mtcars`o también `help(mtcars)`. De la base de mtcars obtenga bases de datos que cumplen las siguientes condiciones.**
+
+***Autos que tengan un rendimiento menor a 18 millas por galón de combustible.**
+
+***Autos que tengan 4 cilindros.** 
+
+***Autos que pesen más de 2500 libras y tengan transmisión manual.**
+
+Vemos primero lo que hay en el archivo mediante `head()`:
+```{r}
+head(mtcars)
+```
+En el primer punto, para un rendimiento menor a 18 millas por galon de combustible (mpg) creamos un `subset()` que nos arroje los autos:
+```{r}
+menor_millas <- subset(mtcars, mpg < 18.0)
+menor_millas
+```
+Para el segundo caso obtener que tengan más de 4 cilindros (cyl)
+```{r}
+cilin_4 <- subset(mtcars, cyl == 4)
+cilin_4
+```
+Y para el tercer caso el manual (am) está dado por el valor de 1 y más de 2500 libras(wt):
+```{r}
+libras_manual <- subset(mtcars, wt > 2.500 & am == 1)
+libras_manual
+```
+
+### **16. La ecuación de tiempo es la diferencia entre el tiempo solar medio y el tiempo solar aparente ([Referencia](http://pbarbier.com/eqtime/eqtime.html)). Si bien esta varía, la forma analítica de esta ecuación se muestra a continuación (Usar x como un rango de 0 a 365). Replicar el gráfico:**
+
+<center> _y= 2._$\pi$ _.(x-81)/365_ </center>
+<center> _f(y)=9.87.sin(2y)-7.53.cos(y) - 1.5.sin(y)_ </center>
